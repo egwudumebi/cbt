@@ -13,7 +13,7 @@ class ClassGroup extends Model
     
     protected $filable = ['name', 'code', 'population'];
 
-    public function subclass(): HasManyThrough
+    public function students(): HasManyThrough
     {
         return $this->hasManyThrough(
             Student::class,
@@ -27,6 +27,11 @@ class ClassGroup extends Model
             Teacher::class,
             Subclass::class
         );
+    }
+
+    public function subclasses(): HasMany
+    {
+        return $this->hasMany(Subclass::class);
     }
     
 }

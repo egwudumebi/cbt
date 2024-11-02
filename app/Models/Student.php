@@ -11,7 +11,7 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
-        'firstname', 'lastname', 'othername', 'DOB', 'regnum', 'class_id', 'subclass_id', 'gender', 'password', 'status', 'profile'
+        'firstname', 'lastname', 'othername', 'DOB', 'regnum', 'subclass_id', 'gender', 'password', 'status', 'profile'
     ];
 
     public function classGroup(): HasOneThrough
