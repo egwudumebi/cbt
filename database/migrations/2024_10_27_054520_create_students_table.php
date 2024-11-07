@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->date('DOB');
-            $table->string('reg_number');
+            $table->string('reg_number')->unique();
+            $table->string('password');
             $table->foreignId('subclass_id')->constrained('subclass');
             $table->enum('gender', ['male', 'female']);
-            $table->string('password');
             $table->boolean('status')->default(true);
             $table->string('profile')->nullable();
             $table->timestamps();

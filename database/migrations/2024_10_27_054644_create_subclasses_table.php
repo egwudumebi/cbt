@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('subclasses', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
+            $table->integer('population')->default(0);
+            $table->foreignId('class_id')->constrained('classes')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -14,14 +14,22 @@ class Student extends Model
         'firstname', 'lastname', 'othername', 'DOB', 'regnum', 'subclass_id', 'gender', 'password', 'status', 'profile'
     ];
 
-    public function classGroup(): HasOneThrough
+    public function subclass()
     {
-        return $this->hasOneThrough(
-            ClassGroup::class, 
-            Subclass::class,   
-        );
+        return $this->belongsTo(Subclass::class);
     }
 
+    public function classGroup()
+    {
+        return $this->hasManyThrough(
+            ClassGroup::class,
+            Subclass::class,
+            'id',         // Foreign key on Subclass table
+            'id',         // Foreign key on ClassGroup table
+            'subclass_id', // Local key on Student table
+            'class_group_id' // Local key on Subclass table
+        );
+    }
 
 
     
