@@ -11,8 +11,8 @@ class Subclass extends Model
     use HasFactory;
     protected $fillable = ['name', 'population'];
 
-    public function class_group(): BelongsTo
+    public function classGroup(): BelongsTo
     {
-        return $this->belongsTo(ClassGroup::class, 'class_id');
+        return $this->belongsTo(ClassGroup::class, 'class_group_id');
     }
 }

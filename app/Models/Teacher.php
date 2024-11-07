@@ -20,4 +20,16 @@ class Teacher extends Model
         return $this->belongsToMany(Subclass::class);
     }
 
+    public function classGroups(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            ClassGroup::class, // Final model
+            Subclass::class,   // Intermediate model
+            'teacher_id',      // Foreign key on Subclass table
+            'id',              // Foreign key on ClassGroup table
+            'id',              // Local key on Teacher table
+            'class_group_id'   // Local key on Subclass table
+        );
+    }
+
 }
