@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subclasses', function (Blueprint $table) {
+        Schema::create('subclass_teacher', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->integer('population')->default(0);
-            $table->foreignId('class_group_id')->constrained('classes')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subclasses');
+        Schema::dropIfExists('subclass_teacher');
     }
 };
