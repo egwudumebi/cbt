@@ -21,7 +21,7 @@ class Student extends Model
 
     public function classGroup()
     {
-        return $this->hasManyThrough(
+        return $this->hasOneThrough(
             ClassGroup::class,
             Subclass::class,
             'id',         // Foreign key on Subclass table
@@ -30,6 +30,8 @@ class Student extends Model
             'class_group_id' // Local key on Subclass table
         );
     }
+
+    
 
 
     

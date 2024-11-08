@@ -15,22 +15,17 @@ class Teacher extends Model
         'firstname', 'lastname', 'email', 'phone', 'gender',
     ];
 
-    public function subclass(): BelongsToMany
+    public function subclasses()
     {
-        return $this->belongsToMany(Subclass::class);
+        return $this->belongsToMany(Subclass::class, 'subclass_teacher');
     }
 
-    // Going to create a Pivot table for this
-    // public function classGroups(): HasManyThrough
-    // {
-    //     return $this->hasManyThrough(
-    //         ClassGroup::class, // Final model
-    //         Subclass::class,   // Intermediate model
-    //         'teacher_id',      // Foreign key on Subclass table
-    //         'id',              // Foreign key on ClassGroup table
-    //         'id',              // Local key on Teacher table
-    //         'class_group_id'   // Local key on Subclass table
-    //     );
-    // }
-
+    public function classGroups()
+    {
+        return ClassGroup::whereHas('subclasses', function ($query) {
+            $query->whereHas('teachers', function ($query) {
+                $query->where('teachers.id', $this->id);
+            });
+        })->get();
+    }
 }
