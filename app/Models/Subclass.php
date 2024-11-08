@@ -15,4 +15,9 @@ class Subclass extends Model
     {
         return $this->belongsTo(ClassGroup::class, 'class_group_id');
     }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class);
+    }
 }
