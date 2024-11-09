@@ -73,6 +73,26 @@ class StudentAuthController extends Controller implements AuthInterface
     // Login
     public function login(Request $request)
     {
-        
+        $validator = Validator($request->all(), [
+            'reg_num' => 'required',
+            'password' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 422);
+        }
+        if (Auth::attempt(['reg_num' => $request->reg_num, 'password' => $request->password])) {
+            $user = Student::where('reg_num', $request->reg_num)->first();
+
+            $token = $user->createToken('access-token')->plainTextToken;
+            $userinfo = [
+                'firstname' => $user->firstname,
+                'lastname' => $user->lastname,
+            ];
+
+
+            return response()->json(['token' => $token, 'user' => $userinfo], 200);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Invalid login details']);
+        }
     }
 }
