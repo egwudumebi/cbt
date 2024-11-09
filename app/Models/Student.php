@@ -15,6 +15,12 @@ class Student extends Model
         'firstname', 'lastname', 'othername', 'DOB', 'regnum', 'subclass_id', 'gender', 'password', 'status', 'profile'
     ];
 
+    protected $appends = ['photo_url'];
+    public function getPhotoUrlAttribute()
+    {
+        return url($this->photo);
+    }
+
     public function subclass()
     {
         return $this->belongsTo(Subclass::class);

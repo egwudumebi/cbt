@@ -16,6 +16,12 @@ class Teacher extends Model
         'firstname', 'lastname', 'email', 'phone', 'gender',
     ];
 
+    protected $appends = ['photo_url'];
+    public function getPhotoUrlAttribute()
+    {
+        return url($this->photo);
+    }
+
     public function subclasses()
     {
         return $this->belongsToMany(Subclass::class, 'subclass_teacher');
