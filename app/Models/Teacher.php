@@ -16,10 +16,10 @@ class Teacher extends Model
         'firstname', 'lastname', 'email', 'phone', 'gender',
     ];
 
-    protected $appends = ['photo_url'];
-    public function getPhotoUrlAttribute()
+    protected $appends = ['profile_url'];
+    public function getProfileUrlAttribute()
     {
-        return url($this->photo);
+        return url($this->profile);
     }
 
     public function subclasses()
